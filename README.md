@@ -31,3 +31,19 @@ The Tunify platform's database is designed with several entities to efficiently 
 5. **Songs and Artists**
    - Each **Song** is created by an **Artist**. The `ArtistId` in the Songs table references the `Id` in the Artists table.
    - **One-to-Many Relationship**: One artist can create multiple songs, but each song is created by one artist.
+
+---
+
+
+## Repository Design Pattern
+
+### Overview
+The Repository Design Pattern decouples data access logic from the business logic in the application, promoting modularity and testability.
+
+### Implementation
+In this project, repositories were created for managing data access for the `Users`, `Playlist`, `Song`, and `Artist` entities. These repositories encapsulate CRUD operations and any additional data access logic, making the application easier to maintain and extend.
+
+### Benefits
+- **Separation of Concerns**: Keeps data access logic separate from business logic.
+- **Testability**: Allows for mocking data access during unit tests.
+- **Flexibility**: Facilitates changes in data access strategy without affecting business logic.
