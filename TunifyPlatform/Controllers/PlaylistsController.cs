@@ -16,10 +16,12 @@ namespace TunifyPlatform.Controllers
     public class PlaylistsController : ControllerBase
     {
         private readonly IRepository<Playlist> _playlistRepository;
+        private readonly IPlaylistService _playlistService;
 
-        public PlaylistsController(IRepository<Playlist> playlistRepository)
+        public PlaylistsController(IRepository<Playlist> playlistRepository, IPlaylistService playlistService)
         {
             _playlistRepository = playlistRepository;
+            _playlistService = playlistService;
         }
 
         [HttpGet]
@@ -66,6 +68,25 @@ namespace TunifyPlatform.Controllers
                 return NotFound();
             }
             await _playlistRepository.Delete(id);
+            return NoContent();
+        }
+
+        //Lab 13 New Routes
+        [Route("{playlistId}/songs")]
+        [HttpGet]
+        public async Task<ActionResult> GetSongsForPlaylist(int playlistId)
+        {
+            var playlist = await _playlistRepository.GetById(playlistId);
+            if (playlist == null) return NotFound();
+
+            return Ok(playlist.PlaylistSongs);
+        }
+
+        [Route("{playlistId}/songs/{songId}")]
+        [HttpPost]
+        public async Task<IActionResult> AddSongToPlaylist(int playlistId, int songId)
+        {
+            await _playlistService.AddSongToPlaylist(playlistId, songId);
             return NoContent();
         }
 
