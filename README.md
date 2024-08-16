@@ -47,3 +47,15 @@ In this project, repositories were created for managing data access for the `Use
 - **Separation of Concerns**: Keeps data access logic separate from business logic.
 - **Testability**: Allows for mocking data access during unit tests.
 - **Flexibility**: Facilitates changes in data access strategy without affecting business logic.
+
+
+## New Navigation and Routing Functionalities
+
+In this lab, we introduced advanced navigation and routing functionalities to improve the user experience within the **Tunify Platform**. These enhancements include:
+
+- **Dynamic Routing**: Routes are dynamically generated based on user actions such as playlist creation or artist selection.
+- **Nested Routing**: Certain pages, such as songs within a playlist or albums by an artist, use nested routes to keep the URL structure clean and meaningful.
+- **Parameterized Routing**: Routes now accept dynamic parameters for accessing specific resources. For example:
+  - `/playlists/:id/songs` for viewing songs in a playlist.
+  - `/artists/:id/songs` for viewing songs by a particular artist.
+- **Lazy Loading**: Implemented lazy loading for certain modules to improve performance, loading only the necessary components when they are needed.
