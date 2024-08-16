@@ -20,6 +20,9 @@ namespace TunifyPlatform
             // Register repositories
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+            builder.Services.AddScoped<IPlaylistService, PlaylistService>();
+            builder.Services.AddScoped<IArtistService, ArtistService>();
+
             var app = builder.Build();
             app.MapControllers();
 

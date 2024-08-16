@@ -16,12 +16,14 @@ namespace TunifyPlatform.Controllers
     public class ArtistsController : ControllerBase
     {
         private readonly IRepository<Artist> _artistRepository;
+        private readonly IArtistService _artistService;
 
-        public ArtistsController(IRepository<Artist> artistRepository)
+        public ArtistsController(IRepository<Artist> artistRepository, IArtistService artistService)
         {
             _artistRepository = artistRepository;
+            _artistService = artistService;
         }
-
+        [Route("/GetAll")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Artist>>> GetArtists()
         {
@@ -68,5 +70,25 @@ namespace TunifyPlatform.Controllers
             await _artistRepository.Delete(id);
             return NoContent();
         }
+
+        //Lab 13 New Routes
+        
+        [HttpGet("{artistId}/songs")]
+        public async Task<ActionResult> GetSongsForArtist(int artistId)
+        {
+            var artist = await _artistRepository.GetById(artistId);
+            if (artist == null) return NotFound();
+
+            return Ok(artist.Songs);
+        }
+
+        [Route("{artistId}/songs/{songId}")]
+        [HttpPost]
+        public async Task<IActionResult> AddSongToArtist(int artistId, int songId)
+        {
+            await _artistService.AddSongToArtist(artistId, songId);
+            return NoContent();
+        }
+
     }
 }
