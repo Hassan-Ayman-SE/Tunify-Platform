@@ -1,7 +1,11 @@
-﻿namespace TunifyPlatform.Repositories.Interfaces
+﻿using TunifyPlatform.Models;
+
+namespace TunifyPlatform.Repositories.Interfaces
 {
     public interface IArtistService
     {
-        Task AddSongToArtist(int artistId, int songId);
+        Task AddSongToArtistAsync(int artistId, int songId);
+        Task<IEnumerable<Song>> GetSongsByArtistAsync(int artistId);
+
     }
 }

@@ -72,22 +72,34 @@ namespace TunifyPlatform.Controllers
         }
 
         //Lab 13 New Routes
-        
-        [HttpGet("{artistId}/songs")]
-        public async Task<ActionResult> GetSongsForArtist(int artistId)
-        {
-            var artist = await _artistRepository.GetById(artistId);
-            if (artist == null) return NotFound();
 
-            return Ok(artist.Songs);
-        }
-
-        [Route("{artistId}/songs/{songId}")]
-        [HttpPost]
+        // POST: api/Artists/{artistId}/Songs/{songId}
+        [HttpPost("{artistId}/Songs/{songId}")]
         public async Task<IActionResult> AddSongToArtist(int artistId, int songId)
         {
-            await _artistService.AddSongToArtist(artistId, songId);
-            return NoContent();
+            try
+            {
+                await _artistService.AddSongToArtistAsync(artistId, songId);
+                return Ok(new { Message = "Song added to artist successfully." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        // GET: api/Artists/{artistId}/Songs
+        //[Route("{artistId}/Songs")]
+        [HttpGet("{artistId}/Songs")]
+        public async Task<ActionResult<IEnumerable<Song>>> GetSongsByArtist(int artistId)
+        {
+            var songs = await _artistService.GetSongsByArtistAsync(artistId);
+            if (songs == null || !songs.Any())
+            {
+                return NotFound("No songs found for this artist.");
+            }
+
+            return Ok(songs);
         }
 
     }

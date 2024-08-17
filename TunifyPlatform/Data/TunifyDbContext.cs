@@ -27,6 +27,18 @@ namespace TunifyPlatform.Data
                 .WithMany(s => s.Users)
                 .HasForeignKey(u => u.SubscriptionId);
 
+            modelBuilder.Entity<Artist>()
+                .HasMany(a => a.Songs)
+                .WithOne(s => s.Artist)
+                .HasForeignKey(s => s.ArtistId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Album>()
+                .HasMany(al => al.Songs)
+                .WithOne(s => s.Album)
+                .HasForeignKey(s => s.AlbumId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Playlist>()
                 .HasOne(p => p.User)
                 .WithMany(u => u.Playlists)
@@ -44,7 +56,7 @@ namespace TunifyPlatform.Data
 
             modelBuilder.Entity<PlaylistSongs>()
                 .HasKey(ps => new { ps.PlaylistId, ps.SongId });
-
+            
             modelBuilder.Entity<PlaylistSongs>()
                 .HasOne(ps => ps.Playlist)
                 .WithMany(p => p.PlaylistSongs)

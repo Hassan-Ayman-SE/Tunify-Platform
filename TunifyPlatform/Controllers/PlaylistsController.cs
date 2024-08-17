@@ -72,22 +72,48 @@ namespace TunifyPlatform.Controllers
         }
 
         //Lab 13 New Routes
+        // GET api/playlists/{playlistId}/songs
         [Route("{playlistId}/songs")]
         [HttpGet]
-        public async Task<ActionResult> GetSongsForPlaylist(int playlistId)
+        public async Task<ActionResult<IEnumerable<Song>>> GetSongsForPlaylist(int playlistId)
         {
-            var playlist = await _playlistRepository.GetById(playlistId);
-            if (playlist == null) return NotFound();
-
-            return Ok(playlist.PlaylistSongs);
+            try
+            {
+                var songs = await _playlistService.GetSongsInPlaylistAsync(playlistId);
+                return Ok(songs);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
-
+        // POST api/playlists/{playlistId}/songs/{songId}
         [Route("{playlistId}/songs/{songId}")]
         [HttpPost]
         public async Task<IActionResult> AddSongToPlaylist(int playlistId, int songId)
         {
-            await _playlistService.AddSongToPlaylist(playlistId, songId);
-            return NoContent();
+            try
+            {
+                // Add the song to the specified playlist
+                await _playlistService.AddSongToPlaylist(playlistId, songId);
+
+                // Return a 204 No Content status to indicate successful operation
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                //  if the playlist or song is not found
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Return a 500 Internal Server Error status for other exceptions
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
 
     }
