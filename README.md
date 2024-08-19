@@ -52,7 +52,7 @@ In this project, repositories were created for managing data access for the `Use
 
 ## New Navigation and Routing Functionalities
 
-In this lab, we introduced advanced navigation and routing functionalities to improve the user experience within the **Tunify Platform**. These enhancements include:
+We introduced advanced navigation and routing functionalities to improve the user experience within the **Tunify Platform**. These enhancements include:
 
 - **Dynamic Routing**: Routes are dynamically generated based on user actions such as playlist creation or artist selection.
 - **Nested Routing**: Certain pages, such as songs within a playlist or albums by an artist, use nested routes to keep the URL structure clean and meaningful.
@@ -65,7 +65,7 @@ In this lab, we introduced advanced navigation and routing functionalities to im
 
 ## Addition of Swagger UI
 
-In this lab, We have added Swagger UI to our Tunify Platform. Swagger UI is a tool that allows us to visualize and interact with the API's resources without having any of the implementation logic in place. It's a powerful tool for API development and testing.
+We have added Swagger UI to our Tunify Platform. Swagger UI is a tool that allows us to visualize and interact with the API's resources without having any of the implementation logic in place. It's a powerful tool for API development and testing.
 
 We have used Swashbuckle.AspNetCore to set up Swagger UI. Swashbuckle.AspNetCore is a NuGet package that seamlessly adds a Swagger to WebApi projects.
 
