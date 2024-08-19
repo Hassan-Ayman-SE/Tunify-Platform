@@ -48,6 +48,7 @@ In this project, repositories were created for managing data access for the `Use
 - **Testability**: Allows for mocking data access during unit tests.
 - **Flexibility**: Facilitates changes in data access strategy without affecting business logic.
 
+---
 
 ## New Navigation and Routing Functionalities
 
@@ -59,3 +60,19 @@ In this lab, we introduced advanced navigation and routing functionalities to im
   - `/playlists/:id/songs` for viewing songs in a playlist.
   - `/artists/:id/songs` for viewing songs by a particular artist.
 - **Lazy Loading**: Implemented lazy loading for certain modules to improve performance, loading only the necessary components when they are needed.
+
+---
+
+## Addition of Swagger UI
+
+In this lab, We have added Swagger UI to our Tunify Platform. Swagger UI is a tool that allows us to visualize and interact with the API's resources without having any of the implementation logic in place. It's a powerful tool for API development and testing.
+
+We have used Swashbuckle.AspNetCore to set up Swagger UI. Swashbuckle.AspNetCore is a NuGet package that seamlessly adds a Swagger to WebApi projects.
+
+## How to access and use the Swagger UI
+
+To access the Swagger UI, launch the application and navigate to the root URL. This will open the Swagger UI where you can see all the API endpoints documented.
+
+You can use the Swagger UI to interact with the API endpoints and test their functionality. It provides a way to understand the capabilities of the API without diving into the code.
+
+To use the Swagger UI, simply click on an API endpoint to expand it. You can see the details of the endpoint, including its parameters, responses, and even try it out by clicking the "Try it out" button. Fill in any required parameters and click "Execute" to see the response from the API.
