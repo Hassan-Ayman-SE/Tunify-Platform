@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TunifyPlatform.Data;
 
@@ -11,9 +12,11 @@ using TunifyPlatform.Data;
 namespace TunifyPlatform.Migrations
 {
     [DbContext(typeof(TunifyDbContext))]
-    partial class TunifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240822132415_addIdentity")]
+    partial class addIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -516,7 +519,7 @@ namespace TunifyPlatform.Migrations
                         {
                             UserId = 1,
                             Email = "admin@example.com",
-                            JoinDate = new DateTime(2024, 8, 22, 16, 46, 52, 886, DateTimeKind.Local).AddTicks(9626),
+                            JoinDate = new DateTime(2024, 8, 22, 16, 24, 15, 354, DateTimeKind.Local).AddTicks(2624),
                             SubscriptionId = 1,
                             Username = "admin"
                         },
@@ -524,7 +527,7 @@ namespace TunifyPlatform.Migrations
                         {
                             UserId = 2,
                             Email = "user1@example.com",
-                            JoinDate = new DateTime(2024, 8, 12, 16, 46, 52, 886, DateTimeKind.Local).AddTicks(9640),
+                            JoinDate = new DateTime(2024, 8, 12, 16, 24, 15, 354, DateTimeKind.Local).AddTicks(2642),
                             SubscriptionId = 1,
                             Username = "user1"
                         },
@@ -532,7 +535,7 @@ namespace TunifyPlatform.Migrations
                         {
                             UserId = 3,
                             Email = "user2@example.com",
-                            JoinDate = new DateTime(2024, 8, 2, 16, 46, 52, 886, DateTimeKind.Local).AddTicks(9647),
+                            JoinDate = new DateTime(2024, 8, 2, 16, 24, 15, 354, DateTimeKind.Local).AddTicks(2649),
                             SubscriptionId = 2,
                             Username = "user2"
                         },
@@ -540,7 +543,7 @@ namespace TunifyPlatform.Migrations
                         {
                             UserId = 4,
                             Email = "user3@example.com",
-                            JoinDate = new DateTime(2024, 7, 23, 16, 46, 52, 886, DateTimeKind.Local).AddTicks(9649),
+                            JoinDate = new DateTime(2024, 7, 23, 16, 24, 15, 354, DateTimeKind.Local).AddTicks(2650),
                             SubscriptionId = 2,
                             Username = "user3"
                         },
@@ -548,7 +551,7 @@ namespace TunifyPlatform.Migrations
                         {
                             UserId = 5,
                             Email = "user4@example.com",
-                            JoinDate = new DateTime(2024, 7, 13, 16, 46, 52, 886, DateTimeKind.Local).AddTicks(9650),
+                            JoinDate = new DateTime(2024, 7, 13, 16, 24, 15, 354, DateTimeKind.Local).AddTicks(2652),
                             SubscriptionId = 1,
                             Username = "user4"
                         });

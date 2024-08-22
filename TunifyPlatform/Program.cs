@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using TunifyPlatform.Data;
@@ -30,6 +31,8 @@ namespace TunifyPlatform
 
             builder.Services.AddScoped<IPlaylistService, PlaylistService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddScoped<IAccount, IdentityAccountService>();
+
 
             // Swagger Config
             builder.Services.AddSwaggerGen(options =>
@@ -41,6 +44,11 @@ namespace TunifyPlatform
                     Description = "API for managing playlists, songs, and artists in the Tunify Platform"
                 });
             });
+
+            //Configure Identity
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                   .AddEntityFrameworkStores<TunifyDbContext>();
+
 
             var app = builder.Build();
 
@@ -56,6 +64,9 @@ namespace TunifyPlatform
                 options.SwaggerEndpoint("/api/v1/swagger.json", "Tunify API v1");
                 options.RoutePrefix = "TunifySwagger";
             });
+
+            //Authentication
+            app.UseAuthentication();
             app.MapControllers();
 
             app.MapGet("/", () => "Hello World!");
