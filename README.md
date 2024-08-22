@@ -76,3 +76,22 @@ To access the Swagger UI, launch the application and navigate to the root URL. T
 You can use the Swagger UI to interact with the API endpoints and test their functionality. It provides a way to understand the capabilities of the API without diving into the code.
 
 To use the Swagger UI, simply click on an API endpoint to expand it. You can see the details of the endpoint, including its parameters, responses, and even try it out by clicking the "Try it out" button. Fill in any required parameters and click "Execute" to see the response from the API.
+
+---
+
+## Identity Setup
+
+The Tunify Platform now supports user authentication via ASP.NET Core Identity. Users can register, log in, and log out seamlessly.
+
+### Features
+- **Registration**: Users can create a new account.
+- **Login**: Users can log in with their credentials.
+- **Logout**: Users can log out of their account.
+
+### How to Use
+- **Register**: Send a POST request to `/api/account/register` with `Username`, `Email`, and `Password`.
+- **Login**: Send a POST request to `/api/account/login` with `Email` and `Password`.
+- **Logout**: Send a POST request to `/api/account/logout`.
+
+### Error Handling
+The application provides feedback for registration and login failures. Errors are logged for troubleshooting.
