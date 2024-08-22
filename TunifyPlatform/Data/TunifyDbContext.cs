@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TunifyPlatform.Models;
 
 namespace TunifyPlatform.Data
 {
-    public class TunifyDbContext : DbContext
+    public class TunifyDbContext : IdentityDbContext<IdentityUser>
     {
         public TunifyDbContext(DbContextOptions options) : base(options)
         {
