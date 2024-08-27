@@ -95,3 +95,22 @@ The Tunify Platform now supports user authentication via ASP.NET Core Identity. 
 
 ### Error Handling
 The application provides feedback for registration and login failures. Errors are logged for troubleshooting.
+
+--- 
+
+## JWT Authentication
+
+The Tunify Platform now uses JWT for secure authentication and authorization.
+
+### Features
+- **JWT Tokens**: Generated on successful login.
+- **Secure Endpoints**: Use `[Authorize]` to secure API endpoints.
+- **Roles and Claims**: Manage user roles and claims.
+
+### How to Use
+- **Login**: Obtain a JWT token via the `/api/account/login` endpoint.
+- **Access Secure Endpoints**: Include the token in the `Authorization` header as a Bearer token.
+
+### Role and Claim Management
+- Default roles: Admin, User
+- Assign roles to users to control access to specific features.
