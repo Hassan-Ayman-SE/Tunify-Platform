@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ErdAndEF.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TunifyPlatform.Models.DTO;
 using TunifyPlatform.Repositories.Interfaces;
@@ -16,37 +18,49 @@ namespace TunifyPlatform.Controllers
             _accountService = accountService;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        [HttpPost("Register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid registration details");
 
-            var result = await _accountService.RegisterUser(registerDto);
 
-            if (result.Succeeded)
+            var user = await _accountService.RegisterUser(registerDto, this.ModelState);
+
+
+            if (ModelState.IsValid)
             {
-                return Ok("Registration successful");
+                return user;
             }
 
-            // Collect all errors and return them in the response
-            var errors = result.Errors.Select(e => e.Description);
-            return BadRequest(new { Message = "Registration failed", Errors = errors });
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return BadRequest();
         }
 
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        // login 
+        [HttpPost("Login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid login details");
+            var user = await _accountService.LoginUser(loginDto);
 
-            var result = await _accountService.LoginUser(loginDto);
-            if (result)
-                return Ok("Login successful");
-            return Unauthorized("Login failed");
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return user;
         }
 
+        [Authorize(Roles = "Admin")] 
+        [HttpGet("Profile")]
+        public async Task<ActionResult<UserDto>> Profile()
+        {
+            return await _accountService.UserProfile(User);
+        }
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {

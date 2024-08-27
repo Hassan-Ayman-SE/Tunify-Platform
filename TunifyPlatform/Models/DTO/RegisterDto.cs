@@ -13,6 +13,7 @@ namespace TunifyPlatform.Models.DTO
         [DataType(DataType.Password)]
         [MinLength(6)]
         public string Password { get; set; }
+        public IList<string> Roles { get; set; }
     }
 
 }
