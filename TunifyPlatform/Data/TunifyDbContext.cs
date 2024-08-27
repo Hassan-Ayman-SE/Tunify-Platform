@@ -115,8 +115,26 @@ namespace TunifyPlatform.Data
                 new Playlist { Id = 5, Name = "Playlist 5", UserId = 5 }
             );
 
+            seedRoles(modelBuilder, "Admin");
+            seedRoles(modelBuilder, "User");
+
+        }
+
+        private void seedRoles(ModelBuilder modelBuilder, string roleName, params string[] permission)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            // add claims for the users
+            // complete
 
 
+            modelBuilder.Entity<IdentityRole>().HasData(role);
         }
     }
 }
