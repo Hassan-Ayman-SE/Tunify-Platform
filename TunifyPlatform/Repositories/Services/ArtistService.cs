@@ -7,6 +7,7 @@ namespace TunifyPlatform.Repositories.Services
 {
     public class ArtistService : IArtistService
     {
+
         private readonly IRepository<Song> _songRepository;
         private readonly IRepository<Artist> _artistRepository;
         private readonly TunifyDbContext _context;
